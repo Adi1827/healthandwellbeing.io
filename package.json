@@ -1,0 +1,23 @@
+{
+  "name": "health-wellbeing",
+  "version": "1.0.0",
+  "description": "an app for health and wellness",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Aditya",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.10.1",
+    "node": "^22.3.0",
+    "nodemon": "^3.1.3"
+  }
+}

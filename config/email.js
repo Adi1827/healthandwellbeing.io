@@ -20,7 +20,7 @@ exports.sendLoginMail = function (userAvailable) {
         to: userAvailable.email,
         subject: "Testing",
         html: `<h1>You just logged</h1><br><a href="localhost:3000/landing">If not you click here!</a>`,
-        text: "You just logged in!",
+        text: "You just logged in!"
       };
 
       transporter.sendMail(mailOptions, (err, mssg) => {
@@ -94,7 +94,7 @@ exports.sendRegistrationMail = function(name ,email ,token){
         <p>Hello ${name},</p>
         <p>We Recently found you registered at Health Wellbeing</p>
         <p>Thank you for registering with us. Please click the button below to verify your email address.</p>
-        <a href="http:localhost:3000/verify/${token}" class="btn">Verify Email</a>
+        <a href="http://localhost:3000/verify/${token}" class="btn">Verify Email</a>
     </div>
 </body>
         </html>`
@@ -105,5 +105,26 @@ exports.sendRegistrationMail = function(name ,email ,token){
       else console.log(mssg);
     });
   }
+  })
+}
+
+exports.sendMedMail = function(userEmail,medName,medDesc){
+  transporter.verify((err,success)=>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      const mailOptions = {
+      from: process.env.EMAIL_USERNAME,
+      to: userEmail,
+      subject: `Medicine Remainder`,
+      html: `<h1>Medicine Remainder</h1><br><p>Medicine Name : ${medName}<br>Medicine description : ${medDesc}</p>`
+      };
+
+      transporter.sendMail(mailOptions,(err,mssg)=>{
+        if(err) console.log(err);
+        else console.log(mssg);
+      })
+    }
   })
 }

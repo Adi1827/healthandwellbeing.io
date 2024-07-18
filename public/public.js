@@ -28,19 +28,3 @@ async function verifyUser(event) {
         console.error("Error:", err);
     }
 }
-
-async function userLogOut() {
-    try{
-    const response = await fetch('/logout')
-    console.log(response);
-    if(response.ok){
-        window.location.href = `/login`;
-    }
-    else{
-        console.error("Logout failed:", response.statusText);
-    }
-    }
-    catch(err){
-        console.error("Error:", err);
-    };
-}

@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header button {
+    background-color: #fff;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+header button:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select option {
+    font-size: 20px;
+    background-color: white; /* Background color of options */
+    color: #333;
+}
+
+select option:hover {
+    background-color: #f0f0f0; /* Hover background color */
+    color: #000; /* Hover text color */
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ol {
+    padding-left: 2rem;
+}
+
+ol li {
+    margin-bottom: 0.5rem;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.form-container > div {
+    flex: 1 1 45%;
+}
+
+#notificationModal .modal-header {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#notificationModal .modal-footer .btn-secondary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#notificationModal .modal-footer .btn-secondary:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .form-container > div {
+        flex: 1 1 100%;
+    }
+}

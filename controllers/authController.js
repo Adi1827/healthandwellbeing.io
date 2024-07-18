@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const DataTypes = require("sequelize");
+const schedule = require("node-schedule")
 const User = require("../models/userModels");
 const sendEmail = require("../config/email");
 const headers = new Headers();
@@ -26,9 +26,9 @@ exports.userLogin = async function (req, res) {
       const token = jwt.sign(
         { uname: uname, pwd: pwd },
         process.env.SECRET_KEY,
-        { expiresIn: "60s" }
+        { expiresIn: "150d" }
       );
-      res.cookie("jwt", token, { httpOnly: true, secure: true, maxAge: 60000 });
+      res.cookie("jwt", token, { httpOnly: true, secure: true, maxAge: 1000*60*60*24*150 });
       res.status(200).send(token);
     } else {
       res.status(401).send("Username or Password not valid");
@@ -44,9 +44,6 @@ exports.userSignUpPageRender = async function (req, res) {
     if (req.cookies.jwt) {
       res.redirect("/landing");
     } else {
-      // const usernames = await User.findAll(
-      //   {attributes: ["userName"]}
-      // );
       res.render("signup");
     }
   } catch (err) {
@@ -76,13 +73,30 @@ exports.userRegister = async function (req, res) {
   }
 };
 
-exports.jwtVerifier = function (req, res) {
+exports.jwtVerifier = async function (req, res) {
   const authHeader = req.cookies.jwt;
   if (authHeader) {
     const token = authHeader;
     try {
+      const jobs = Object.keys(schedule.scheduledJobs);      
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      res.render(`landing`, { decoded });
+
+      const userID = await User.findOne({
+        where : {
+          userName : decoded.uname,
+        },
+        attributes : ["id"]
+      });
+      const jobList = jobs.map(
+        (x)=>
+          { 
+            if(parseInt(x.split(':')[0])===userID.id && jobs.length!=0){
+              
+              return x.split(':')[1];
+            }
+         })
+
+      res.render(`landing`, { decoded ,jobList });
     } catch (err) {
       res.status(401).send(`<head>
       <meta http-equiv='refresh' content='2; URL=/login'>
@@ -100,20 +114,30 @@ exports.jwtVerifier = function (req, res) {
 
 exports.tokenRegister = function (req, res) {
   const verifyToken = jwt.verify(req.params.token, process.env.SECRET_KEY);
+
   if (verifyToken) {
     // Registering User 
-    // console.log(verifyToken.name);
-    const userCreate = Register.userRegister( verifyToken.name, verifyToken.lname, parseInt(verifyToken.age), verifyToken.email, verifyToken.uname, verifyToken.pwd );
+    const userCreate = Register.userRegister( 
+      verifyToken.name, 
+      verifyToken.lname, 
+      parseInt(verifyToken.age), 
+      verifyToken.email, 
+      verifyToken.uname, 
+      verifyToken.pwd );
+
     if(userCreate){
     console.log("User Verified and Registering");
-    res.redirect('/login');
-  }
-  else{
+    const token = jwt.sign(
+      { uname : verifyToken.uname, pwd: verifyToken.pwd },
+      process.env.SECRET_KEY,
+      { expiresIn: '100d' }
+    )
+    res.cookie("jwt",token, {httpOnly:true, secure:true, maxAge:1000*60*60*24*100})
+    res.redirect('/login');}
+    else{
     console.log("User Verified but not Registering");
     res.status(404).send("Could'nt register the User");
-  }
-  }
-  // res.cookies("jwt",req.params.token,)
+  }}
 };
 
 exports.verifyUser = function (req, res) {
@@ -128,7 +152,7 @@ exports.verifyUser = function (req, res) {
       pwd: password,
     },
     process.env.SECRET_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: "150d" }
   );
   sendEmail.sendRegistrationMail(name, email, token);
   res.render("waitingPage", { email });

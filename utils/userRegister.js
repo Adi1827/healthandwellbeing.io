@@ -21,7 +21,6 @@ exports.userRegister = async function( name, lname, age, email, uname, password 
     if (created) {
       console.log(user, "was created");
       return created;
-    //   res.redirect("/login");
     } else return(500);
   } catch (err) {
     if (err) {

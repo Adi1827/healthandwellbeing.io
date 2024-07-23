@@ -26,37 +26,41 @@
                 </ol>
             </div>
         <% } %>
+        <div class="button-divider">
+        <button onclick="toggleOneTimeForm()">One Time Medicine Notification</button>
+        <button onclick="toggleRecurForm()">Recurring Medicine Notification</button>
+    </div>
         <div class="form-container">
-            <div>
-                <button onclick="toggleOneTimeForm()">One Time Med</button>
                 <form id="one__time__form" hidden>
-                    <h2>Enter Medicine Details</h2>
+                    <button type="button" class="close" data-dismiss="form" aria-label="Close" onclick="toggleOneTimeForm()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    <h2>Enter One Time Medicine Details</h2>
                     <label for="medName">Enter Medicine Name:</label>
-                    <input type="text" name="medName" id="medName"><br>
+                    <input type="text" name="medName" id="medName" required><br>
                     <label for="medDesc">Enter Description:</label>
-                    <input type="text" name="medDesc" id="medDesc"><br>
+                    <input type="text" name="medDesc" id="medDesc" placeholder="optional"><br>
                     <h2>Select Date and Time</h2>
                     <input type="date" name="medicDate" id="date" required/>
                     <input type="time" name="medicTime" id="time" required/>
                     <input type="submit" value="Set Medicine Remainder" name="submit"/>
                 </form>
-            </div>
-            <div>
-                <button onclick="toggleRecurForm()">Recurring Form</button>
                 <form id="recurring__form" hidden>
-                    <h2>Enter Medicine Details</h2>
+                    <button type="button" class="close" data-dismiss="form" aria-label="Close" onclick="toggleRecurForm()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    <h2>Enter Reccuring Medicine Details</h2>
                     <label for="recurMedName">Enter Medicine Name:</label>
-                    <input type="text" name="recurMedName" id="recurMedName" required>
+                    <input type="text" name="recurMedName" id="recurMedName" placeholder="Paracetomal..." required>
                     <label for="recurMedDesc">Enter Description:</label>
-                    <input type="text" name="recurMedDesc" id="recurMedDesc" placeholder="optional"><br>
-                    <label for="medFreqUnit">Enter Frequency Unit:</label>
+                    <input type="text" name="recurMedDesc" id="recurMedDesc" placeholder="Paracetamol is a medicine used to treat mild to moderate pain..."><br>
+                    <label for="medFreqUnit">Select Notification Cycle:</label>
                     <select name="medFreqUnit" id="medFreqUnit" required>
-                        <option disabled selected value> --select-- </option>
+                        <option disabled selected value> --daily or weekly </option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
                     </select><br>
                 </form>
-            </div>
         </div>
     </main>
     <!-- Notification Modal -->

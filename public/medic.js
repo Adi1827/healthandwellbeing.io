@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let newElement = null;
 
   selectElement.addEventListener("change", () => {
+    window.scroll({
+      top:650,
+      bottom:450,
+      behavior:"smooth"
+    })
+    
+
     if (newElement!=null){
       container.removeChild(newElement);
       newElement = null;
@@ -25,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option value="5">Friday</option>
                 <option value="6">Saturday</option>
                 <option value="7">Sunday</option>
-            </select>
+            </select><br>
             <h2>Select Start Date and End Date</h2>
                 <label for="medName">Start Date:</label>
                     <input type="date" name="startDate" id="startDate" min=${new Date().toISOString().split("T")[0]} required/>
@@ -46,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } else if (selectElement.value === "daily") {
       newElement = document.createElement("div");
-      newElement.innerHTML = `
+      newElement.innerHTML = `<br>
       <h2>Select Start Date and End Date</h2>
       <label for="medName">Start Date:</label>
       <input type="date" name="startDate" id="startDate" min=${new Date().toISOString().split("T")[0]} required/>
@@ -91,6 +98,11 @@ function toggleOneTimeForm() {
   }
   form.hidden = !form.hidden;
   form.reset();
+  window.scroll({
+    top:300,
+    bottom:250,
+    behavior:"smooth"
+  })
 }
 
 function toggleRecurForm() {
@@ -99,8 +111,14 @@ function toggleRecurForm() {
   if (!oneTimeForm.hidden) {
     oneTimeForm.hidden = !oneTimeForm.hidden;
   }
+  
   form.hidden = !form.hidden;
   form.reset();
+  window.scroll({
+    top:250,
+    bottom:250,
+    behavior:"smooth"
+  })
 }
 
 document

@@ -2,7 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: whitesmoke;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
 }
 
 header {
@@ -52,6 +56,11 @@ button:hover {
     background-color: #45a049;
 }
 
+.button-divider button {
+    width: 49%;
+    font-size: larger;
+}
+
 form {
     background-color: white;
     padding: 2rem;
@@ -79,16 +88,17 @@ select {
 
 select option {
     font-size: 20px;
-    background-color: white; /* Background color of options */
+    background-color: white;
     color: #333;
 }
 
 select option:hover {
-    background-color: #f0f0f0; /* Hover background color */
-    color: #000; /* Hover text color */
+    background-color: #f0f0f0;
+    color: #000;
 }
 
 input[type="submit"] {
+    width: 100%;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -119,14 +129,11 @@ ol li {
 }
 
 .form-container {
-    display: flex;
+    display:block;
     flex-wrap: wrap;
     gap: 2rem;
 }
 
-.form-container > div {
-    flex: 1 1 45%;
-}
 
 #notificationModal .modal-header {
     background-color: #4CAF50;

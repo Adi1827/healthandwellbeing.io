@@ -5,8 +5,7 @@ dotenv.config();
 
 const db = new Sequelize("healthwellbeing",process.env.DATABASE_USERNAME,process.env.DATABASE_PASSWORD,{
     host: 'localhost',
-    dialect: 'mysql',
-    logging:false
+    dialect: 'mysql'
 })
 
 module.exports = db;

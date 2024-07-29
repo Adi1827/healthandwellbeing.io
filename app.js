@@ -33,7 +33,17 @@ if (!process.env.SECRET_KEY) {
 }
 
 app.use("/", loginRoute, authRoute);
-app.use("*",errorRoute);
+
+// Handle 404 errors
+app.use((req, res, next) => {
+  res.render('default',{err : 'Page not found!'});
+});
+
+// Optionally, handle other errors (e.g., 500 Internal Server Error)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 app.listen(process.env.PORT, (err) => {
   if (err) {

@@ -134,6 +134,18 @@ ol li {
     gap: 2rem;
 }
 
+.form-container input[type="date"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
 
 #notificationModal .modal-header {
     background-color: #4CAF50;

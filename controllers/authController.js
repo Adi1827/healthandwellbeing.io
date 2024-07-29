@@ -23,6 +23,7 @@ exports.userLogin = async function (req, res) {
     if (userAvailable) {
       // Sends Mail to User on LogIn
       sendEmail.sendLoginMail(userAvailable);
+      // Signing the jwt
       const token = jwt.sign(
         { uname: uname, pwd: pwd },
         process.env.SECRET_KEY,
@@ -78,6 +79,7 @@ exports.jwtVerifier = async function (req, res) {
   if (authHeader) {
     const token = authHeader;
     try {
+      // Configuring the user's particular Jobs
       const jobs = Object.keys(schedule.scheduledJobs);      
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
@@ -117,12 +119,12 @@ exports.tokenRegister = function (req, res) {
 
   if (verifyToken) {
     // Registering User 
-    const userCreate = Register.userRegister( 
-      verifyToken.name, 
-      verifyToken.lname, 
-      parseInt(verifyToken.age), 
-      verifyToken.email, 
-      verifyToken.uname, 
+    const userCreate = Register.userRegister(
+      verifyToken.name,
+      verifyToken.lname,
+      parseInt(verifyToken.age),
+      verifyToken.email,
+      verifyToken.uname,
       verifyToken.pwd );
 
     if(userCreate){
@@ -136,7 +138,7 @@ exports.tokenRegister = function (req, res) {
     res.redirect('/login');}
     else{
     console.log("User Verified but not Registering");
-    res.status(404).send("Could'nt register the User");
+    res.status(404).send("Couldn't register the User");
   }}
 };
 

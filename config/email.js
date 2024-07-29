@@ -7,7 +7,7 @@ const transporter = mailer.createTransport({
   auth: {
     user: process.env.EMAIL_USERNAME,
     pass: process.env.PASSWORD,
-  },
+  }
 });
 
 
@@ -127,4 +127,33 @@ exports.sendMedMail = function(userEmail,medName,medDesc){
       })
     }
   })
+}
+
+exports.sendReport = function(userId,userName){
+  transporter.verify((err,success)=>{
+    if(err){
+    console.log(err);
+  }
+  else{
+    const mailOptions = {
+      from: process.env.EMAIL_USERNAME,
+      to: process.env.EMAIL_USERNAME,
+      subject: `Weekly Report`,
+      html: `<h1>Weekly Report</h1><br><p>Report for user
+      ${userName}</p>`,
+      attachments : [
+        {
+          filename : `${userId}-${userName}.csv`,
+          path : `./dev-data/${userId}-${userName}.csv`
+        }
+      ]
+    };
+
+    transporter.sendMail(mailOptions,(err,mssg)=>{
+      if(err) console.log(err);
+      else console.log(mssg);
+    })
+  }
+}
+)
 }

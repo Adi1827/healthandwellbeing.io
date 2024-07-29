@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (selectElement.value === "weekly") {
       newElement = document.createElement("div");
+      newElement.id = "weeklyDiv"
       newElement.innerHTML = `<label for="medDay">Select Day:</label>
             <select name="weekDay" id="weeklyDeliverDay" required>
                 <option disabled selected value> --select-- </option>
@@ -48,7 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const endDateInput = newElement.querySelector('#endDate');
 
     startDateInput.addEventListener('change', function() {
-        endDateInput.min = startDateInput.value;
+        let startDate = new Date(startDateInput.value);
+        startDate.setDate(startDate.getDate()+7);
+        endDateInput.min = startDate.toISOString().split("T")[0];
     });
 
     } else if (selectElement.value === "daily") {
@@ -69,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const endDateInput = newElement.querySelector('#endDate');
 
         startDateInput.addEventListener('change', function() {
-        endDateInput.min = startDateInput.value;
+        let startDate = new Date(startDateInput.value);
+        startDate.setDate(startDate.getDate()+1);
+        endDateInput.min = startDate.toISOString().split("T")[0];
       })
     }
   });
@@ -147,7 +152,6 @@ async function setOneTimeMedic(event) {
       const message = `Your schedule for ${medName} has been set for ${date} at ${time}`;
       document.getElementById('notificationMessage').textContent = message;
       $('#notificationModal').modal('show');
-
       form.reset();
     } else {
       $('#errorModal').modal('show');

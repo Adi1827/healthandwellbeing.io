@@ -1,4 +1,4 @@
-# Health and Wellness Management Platform
+# Health and Wellbeing Platform
 
 ## Functionalities
 

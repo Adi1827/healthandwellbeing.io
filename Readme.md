@@ -27,4 +27,4 @@
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/health-wellness-platform.git
+   git clone https://github.com/Adi1827/healthandwellbeing.io

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+https://adi1827.github.io/healthandwellbeing.io/
+>>>>>>> 8b49ed3f08aa9824e48cbf0a04d5d42c4a544c0e
 # Health and Wellbeing Platform
 
 ## Functionalities
@@ -27,4 +31,4 @@
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/health-wellness-platform.git
+   git clone https://github.com/Adi1827/healthandwellbeing.io

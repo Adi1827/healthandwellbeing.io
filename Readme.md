@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 =======
 https://adi1827.github.io/healthandwellbeing.io/
->>>>>>> 8b49ed3f08aa9824e48cbf0a04d5d42c4a544c0e
+>>>>>>> 
 # Health and Wellbeing Platform
 
 ## Functionalities

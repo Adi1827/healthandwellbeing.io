@@ -50,5 +50,6 @@ app.listen(process.env.PORT, (err) => {
     console.log("Some error starting the server...", err);
     throw err;
   }
-  console.log(`Server Started on http://localhost:${process.env.PORT}/login`);
+  // console.log(`Server Started on http://localhost:${process.env.PORT}/login`);
+  console.log(`Server Started`);
 });

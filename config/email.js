@@ -19,7 +19,7 @@ exports.sendLoginMail = function (userAvailable) {
         from: process.env.EMAIL_USERNAME,
         to: userAvailable.email,
         subject: "Testing",
-        html: `<h1>You just logged</h1><br><a href="localhost:3000/landing">If not you click here!</a>`,
+        html: `<h1>You just logged</h1><br><a href="https://healthandwellbeing-io.onrender.com/landing">If not you click here!</a>`,
         text: "You just logged in!"
       };
 
@@ -94,7 +94,7 @@ exports.sendRegistrationMail = function(name ,email ,token){
         <p>Hello ${name},</p>
         <p>We Recently found you registered at Health Wellbeing</p>
         <p>Thank you for registering with us. Please click the button below to verify your email address.</p>
-        <a href="http://localhost:3000/verify/${token}" class="btn">Verify Email</a>
+        <a href="https://healthandwellbeing-io.onrender.com/verify/${token}" class="btn">Verify Email</a>
     </div>
 </body>
         </html>`

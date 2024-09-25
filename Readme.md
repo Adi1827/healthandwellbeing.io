@@ -1,6 +1,6 @@
 # Health and Wellbeing Platform
 
-[Live Demo](https://adi1827.github.io/healthandwellbeing.io/)
+[Live Demo](https://healthandwellbeing-io.onrender.com/)
 
 ## Functionalities
 

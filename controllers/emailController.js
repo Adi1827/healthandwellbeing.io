@@ -13,7 +13,7 @@ exports.oneTimeJob = async function (req, res) {
   const { medName, medDesc, date, time } = req.body;
   const slicedDate = date.split("-");
   const slicedTime = time.split(":");
-  const user = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
+  const user = jwt.verify(req.cookies.session, process.env.SECRET_KEY);
   const userEmail = await Database.findOne({
     where: {
       userName: user.uname,
@@ -83,9 +83,9 @@ exports.oneTimeJob = async function (req, res) {
 };
 
 exports.recurringJob = async function (req, res) {
-  if (req.cookies.jwt) {
+  if (req.cookies.session) {
     const { medFreq } = req.body;
-    const user = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
+    const user = jwt.verify(req.cookies.session, process.env.SECRET_KEY);
     const userEmail = await Database.findOne({
       where: {
         userName: user.uname,

@@ -38,7 +38,7 @@ exports.sendRegistrationMail = function(name ,email ,token){
       const mailOptions = {
         from: process.env.EMAIL_USERNAME,
         to: email,
-        subject: "Verification of Email ",
+        subject: "Verification of Email",
         html: `
         <!DOCTYPE html>
   <html lang="en">

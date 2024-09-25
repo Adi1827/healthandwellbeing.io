@@ -1,7 +1,20 @@
 document.getElementById('form__user').addEventListener('submit', verifyUser);
 
+// Loader functions
+function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+    document.querySelector('.loader-backdrop').style.display = 'block';
+}
+
+function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+    document.querySelector('.loader-backdrop').style.display = 'none';
+}
+
 async function verifyUser(event) {
-    event.preventDefault(); 
+    event.preventDefault();
+
+    showLoader(); // Show loader when login process starts
 
     const uname = document.getElementById('username').value;
     const pwd = document.getElementById('password').value;
@@ -16,6 +29,8 @@ async function verifyUser(event) {
             body: JSON.stringify({ uname, pwd })
         });
 
+        hideLoader(); // Hide the loader once the response is received
+
         if (response.ok) {
             const token = await response.text(); // Assuming server returns token in response body
             window.location.href = `/landing`; // Redirect to landing page with token
@@ -25,6 +40,7 @@ async function verifyUser(event) {
             alert("Incorrect Credentials");
         }
     } catch (err) {
+        hideLoader(); // Hide the loader if an error occurs
         console.error("Error:", err);
     }
 }

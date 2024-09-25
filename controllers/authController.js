@@ -6,7 +6,7 @@ const headers = new Headers();
 const Register = require("../utils/userRegister");
 
 exports.loginPageRender = function (req, res) {
-  if (req.cookies.jwt) {
+  if (req.cookies.session) {
     res.redirect("/landing");
   } else {
     res.render("login");
@@ -16,6 +16,8 @@ exports.loginPageRender = function (req, res) {
 exports.userLogin = async function (req, res) {
   try {
     const { uname, pwd } = req.body;
+    console.log(pwd);
+    
     const userAvailable = await User.findOne({
       where: { userName: uname, password: pwd },
     });
@@ -29,7 +31,7 @@ exports.userLogin = async function (req, res) {
         process.env.SECRET_KEY,
         { expiresIn: "150d" }
       );
-      res.cookie("jwt", token, { httpOnly: true, secure: true, maxAge: 1000*60*60*24*150 });
+      res.cookie("session", token, { httpOnly: true, secure: true, maxAge: 1000*60*60*24*150 });
       res.status(200).send(token);
     } else {
       res.status(401).send("Username or Password not valid");
@@ -42,7 +44,7 @@ exports.userLogin = async function (req, res) {
 exports.userSignUpPageRender = async function (req, res) {
   try {
     // IF USER ALREADY LOGGEDIN
-    if (req.cookies.jwt) {
+    if (req.cookies.session) {
       res.redirect("/landing");
     } else {
       res.render("signup");
@@ -75,7 +77,7 @@ exports.userRegister = async function (req, res) {
 };
 
 exports.jwtVerifier = async function (req, res) {
-  const authHeader = req.cookies.jwt;
+  const authHeader = req.cookies.session;
   if (authHeader) {
     const token = authHeader;
     try {
@@ -91,9 +93,10 @@ exports.jwtVerifier = async function (req, res) {
       });
       const jobList = jobs.map(
         (x)=>
-          { 
-            if(parseInt(x.split(':')[0])===userID.id && jobs.length!=0){
-              
+          {
+            console.log(x);
+            
+            if(parseInt(x.split(':')[0])===userID.id && jobs.length!=0 && !x.split(':')[2].match(/.*-Report$/)){
               return x.split(':')[1];
             }
          })
@@ -134,7 +137,7 @@ exports.tokenRegister = function (req, res) {
       process.env.SECRET_KEY,
       { expiresIn: '100d' }
     )
-    res.cookie("jwt",token, {httpOnly:true, secure:true, maxAge:1000*60*60*24*100})
+    res.cookie("session",token, {httpOnly:true, secure:true, maxAge:1000*60*60*24*100})
     res.redirect('/login');}
     else{
     console.log("User Verified but not Registering");
@@ -161,8 +164,8 @@ exports.verifyUser = function (req, res) {
 };
 
 exports.userLogout = function (req, res) {
-  if (req.cookies.jwt) {
-    res.clearCookie("jwt");
+  if (req.cookies.session) {
+    res.clearCookie("session");
     res.status(200);
     res.redirect("/login");
   } else

@@ -80,8 +80,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Function to show loader
+function showLoader() {
+  document.getElementById('loader').style.display = 'block';
+  document.querySelector('.loader-backdrop').style.display = 'block';
+}
+
+function hideLoader() {
+  document.getElementById('loader').style.display = 'none';
+  document.querySelector('.loader-backdrop').style.display = 'none';
+}
+
+
 async function userLogOut() {
   try {
+    // Show loader when the request starts
+    showLoader();
+
     const response = await fetch("/logout");
     if (response.ok) {
       window.location.href = `/login`;
@@ -92,7 +107,10 @@ async function userLogOut() {
   } catch (err) {
     console.error("Error:", err);
     $('#errorModal').modal('show');
-  }
+  } finally {
+    // Hide loader after the request is completed
+    hideLoader();
+}
 }
 
 function toggleOneTimeForm() {
@@ -133,6 +151,9 @@ document
 async function setOneTimeMedic(event) {
   event.preventDefault();
 
+      // Show loader when the request starts
+      showLoader();
+
   const form = document.getElementById("one__time__form");
   const medName = document.getElementById("medName").value;
   const medDesc = document.getElementById("medDesc").value;
@@ -162,7 +183,10 @@ async function setOneTimeMedic(event) {
     if (err) {
       console.error("Error:", err);
     }
-  }
+  }finally {
+        // Hide loader after the request is completed
+        hideLoader();
+    }
 }
 
 document
@@ -171,6 +195,9 @@ document
 
 async function setRecurMedic(event) {
   event.preventDefault();
+
+    // Show loader when the request starts
+    showLoader();
 
   const form = document.getElementById("recurring__form");
   const medFreq = document.getElementById("medFreqUnit").value;
@@ -251,5 +278,8 @@ async function setRecurMedic(event) {
     if (err) {
       console.error("Error:", err);
     }
-  }
+  } finally {
+    // Hide loader after the request is completed
+    hideLoader();
+}
 }

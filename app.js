@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const db = require("./config/db");
 const loginRoute = require("./routes/userLogin");
 const authRoute = require("./routes/authUser");
-const errorRoute = require("./routes/errorRoutes");
 const cookieParser = require("cookie-parser");
 
 

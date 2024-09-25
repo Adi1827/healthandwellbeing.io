@@ -38,9 +38,13 @@
    npm install
 4. Create a .env file in the root directory and add your environment variables:
    ```sh
-   DATABASE_URL=your-database-url
-   DATABASE_PWD=your-db-pwd
-   EMAIL_PASSWORD=your-email-password
+   PORT = port-number
+   SECRET_KEY = your-secret-key
+   DATABASE = your-database-name
+   DATABASE_UNAME = your-database-uname
+   DATABASE_PWD = your-db-pwd
+   EMAIL_UNAME = your-email
+   password = your-password
 5. Run the application:
    ```sh
    npm start

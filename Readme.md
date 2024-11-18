@@ -12,7 +12,7 @@
 - **Email Notifications**: Send medication reminders and reports via email.
 
 ### Session Management
-- **Basic Session Management**: Secure user sessions using JWT or `express-session`.
+- **Basic Session Management**: Secure user sessions using JWT (we can also use `express-session`).
 
 ### Cron Jobs
 - **Medication Reminders**: Schedule reminders for medications using cron jobs.
